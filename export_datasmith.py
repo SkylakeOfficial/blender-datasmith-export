@@ -2202,7 +2202,11 @@ def collect_and_save(context, args, save_path):
 
 	log.info("collecting objects")
 	datasmith_context['depsgraph'] = context.evaluated_depsgraph_get()
-	all_objects = context.scene.objects
+	
+	#我们只需要Export集合中的被导出
+	ExportCollection = bpy.data.collections["Export"]
+	all_objects = ExportCollection.all_objects
+	
 	root_objects = [obj for obj in all_objects if obj.parent is None]
 
 	objects = []
